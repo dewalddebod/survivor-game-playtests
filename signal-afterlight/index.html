@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071216">
+  <meta name="description" content="Signal Afterlight — a five-minute survival run through a broken garden. No account needed.">
+  <title>Signal Afterlight — Play</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --night: #071216;
+      --mint: #78ffd1;
+      --muted: #91aaa9;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--night); }
+    body { color: #edf8f4; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+
+    #game {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      outline: none;
+      background: var(--night);
+    }
+
+    #loading {
+      position: fixed;
+      z-index: 3;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: max(28px, env(safe-area-inset-top)) 24px max(62px, env(safe-area-inset-bottom));
+      overflow-x: hidden;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background:
+        radial-gradient(ellipse at 50% 20%, rgba(29, 129, 111, .25), transparent 48%),
+        radial-gradient(ellipse at 50% 100%, rgba(31, 72, 73, .3), transparent 54%),
+        var(--night);
+      opacity: 1;
+      transition: opacity .5s ease, visibility .5s ease;
+    }
+
+    #loading::before, #loading::after {
+      position: absolute;
+      content: "";
+      pointer-events: none;
+    }
+
+    #loading::before {
+      inset: 0;
+      opacity: .2;
+      background-image: linear-gradient(rgba(164, 255, 223, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(164, 255, 223, .05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(to bottom, transparent, black 28%, black 76%, transparent);
+    }
+
+    #loading::after {
+      width: min(94vw, 760px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(120, 255, 209, .11);
+      border-radius: 50%;
+      box-shadow: 0 0 0 38px rgba(120, 255, 209, .025), 0 0 0 108px rgba(120, 255, 209, .02), inset 0 0 90px rgba(120, 255, 209, .035);
+      animation: orbit 36s linear infinite;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 430px);
+      flex: 0 0 auto;
+      margin-block: auto;
+      padding: 20px 0 14px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 13px; margin-bottom: clamp(34px, 8vh, 70px); }
+    .mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      place-items: center;
+      border: 1px solid rgba(120, 255, 209, .48);
+      border-radius: 50%;
+      background: rgba(120, 255, 209, .07);
+      box-shadow: 0 0 32px rgba(91, 255, 205, .14), inset 0 0 18px rgba(91, 255, 205, .08);
+    }
+    .mark svg { width: 22px; height: 22px; color: var(--mint); }
+    .brand-copy { display: grid; gap: 4px; }
+    .eyebrow { color: var(--mint); font-size: 10px; font-weight: 750; letter-spacing: .24em; text-transform: uppercase; }
+    .brand-name { color: #b0c6c2; font-size: 10px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
+
+    h1 {
+      margin: 0;
+      color: #f4faf7;
+      font-size: clamp(44px, 11vw, 66px);
+      font-weight: 760;
+      line-height: .93;
+      letter-spacing: -.075em;
+      text-shadow: 0 4px 42px rgba(120, 255, 209, .09);
+    }
+    h1 span { display: block; color: var(--mint); }
+    .subtitle { margin: 22px 0 0; color: #a1b8b5; font-size: 15px; line-height: 1.6; }
+
+    .load-area { margin-top: clamp(40px, 8vh, 64px); }
+    .load-label { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 11px; }
+    #status { color: #c2d5d1; font-size: 12px; line-height: 1.5; }
+    #percent { color: var(--mint); font-variant-numeric: tabular-nums; font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+    .track { height: 5px; overflow: hidden; border: 1px solid rgba(141, 190, 179, .14); border-radius: 999px; background: rgba(137, 184, 172, .09); }
+    #bar { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #43daa9, #a8ffe0); box-shadow: 0 0 18px rgba(120, 255, 209, .52); transition: width .2s ease-out; }
+    .footnote { margin: 12px 0 0; color: #68817f; font-size: 11px; line-height: 1.5; }
+
+    #error { margin-top: 16px; color: #ffc0b8; font-size: 12px; line-height: 1.55; }
+    #error[hidden], #retry[hidden] { display: none; }
+    #error-detail { margin-top: 8px; color: #9b7775; font-size: 10px; overflow-wrap: anywhere; }
+    #error-detail summary { width: fit-content; color: #c39792; cursor: pointer; }
+    #error-detail pre { max-height: 90px; margin: 8px 0 0; overflow: auto; white-space: pre-wrap; }
+
+    #retry {
+      min-height: 46px;
+      margin-top: 20px;
+      padding: 0 20px;
+      border: 1px solid rgba(120, 255, 209, .65);
+      border-radius: 4px;
+      background: var(--mint);
+      color: #071216;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      cursor: pointer;
+      transition: background .16s ease, transform .16s ease;
+    }
+    #retry:hover { transform: translateY(-1px); background: #b1ffe4; }
+    #retry:focus-visible { outline: 2px solid white; outline-offset: 4px; }
+    #tip {
+      position: absolute;
+      right: 20px;
+      bottom: max(16px, env(safe-area-inset-bottom));
+      left: 20px;
+      z-index: 1;
+      color: #5e7b78;
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .is-hidden { visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+    @media (max-height: 600px) {
+      #loading { padding-top: max(16px, env(safe-area-inset-top)); }
+      .brand { margin-bottom: 20px; }
+      .load-area { margin-top: 26px; }
+      .wrap { padding-top: 4px; }
+    }
+    @media (max-height: 450px) {
+      #loading { padding-top: max(12px, env(safe-area-inset-top)); padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+      .brand { margin-bottom: 12px; }
+      h1 { font-size: clamp(34px, 8vh, 46px); }
+      .subtitle { margin-top: 12px; font-size: 13px; line-height: 1.4; }
+      .load-area { margin-top: 20px; }
+      .footnote { margin-top: 8px; }
+      #error { margin-top: 8px; }
+      #retry { min-height: 40px; margin-top: 12px; }
+      #tip { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="game" tabindex="0" aria-label="Signal Afterlight game. Move with WASD, arrow keys, or touch and drag. Bolts auto-target. Press P to pause."></canvas>
+  <main id="loading" aria-label="Loading Signal Afterlight">
+    <section class="wrap" aria-labelledby="title">
+      <div class="brand">
+        <div class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.3" opacity=".7" />
+            <path d="M4 12h4l2.3-4.1 3.4 8.2L16 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+          </svg>
+        </div>
+        <div class="brand-copy">
+          <div class="eyebrow">Forge Originals</div>
+          <div class="brand-name">A signal in the dark</div>
+        </div>
+      </div>
+
+      <h1 id="title">SIGNAL<span>AFTERLIGHT</span></h1>
+      <p class="subtitle">One human runner. A fractured sky.<br>Climb. Leap. Ride the lightning.</p>
+
+      <div class="load-area">
+        <div class="load-label">
+          <div id="status" role="status" aria-live="polite">Connecting to the signal…</div>
+          <div id="percent" aria-hidden="true">0%</div>
+        </div>
+        <div class="track" role="progressbar" aria-label="Game loading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div id="bar"></div>
+        </div>
+        <p class="footnote">Instant play · No account needed</p>
+      </div>
+      <div id="error" role="alert" hidden>
+        The garden could not connect. Check your connection, then try again.
+        <details id="error-detail"><summary>Technical details</summary><pre></pre></details>
+      </div>
+      <button id="retry" type="button" hidden>TRY AGAIN</button>
+    </section>
+    <div id="tip">Drag / WASD to move · Space to jump · E or touch action to climb / zip · Auto-fire</div>
+  </main>
+
+  <script>
+    const canvas = document.getElementById('game');
+    const loading = document.getElementById('loading');
+    const status = document.getElementById('status');
+    const progress = document.querySelector('[role="progressbar"]');
+    const percentLabel = document.getElementById('percent');
+    const errorPanel = document.getElementById('error');
+    const errorDetail = document.querySelector('#error-detail pre');
+    const retry = document.getElementById('retry');
+    const bar = document.getElementById('bar');
+
+    function fail(message) {
+      status.textContent = 'Signal interrupted';
+      errorPanel.hidden = false;
+      errorDetail.textContent = message;
+      retry.hidden = false;
+      loading.classList.remove('is-hidden');
+      loading.setAttribute('aria-hidden', 'false');
+    }
+
+    retry.addEventListener('click', () => location.reload());
+
+    const buildUrl = 'Build';
+    const config = {
+      dataUrl: buildUrl + '/7694b63d8c976faf69063bdb8c52238d.data.unityweb',
+      frameworkUrl: buildUrl + '/e3e1ca093233aaf69d01d4a043d455b4.framework.js.unityweb',
+      codeUrl: buildUrl + '/39d86f42f19bf624889e597463b396d5.wasm.unityweb',
+      streamingAssetsUrl: 'StreamingAssets',
+      companyName: 'Forge Originals',
+      productName: 'Signal Afterlight',
+      productVersion: '1.0.4',
+      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 1.5),
+      showBanner: (message, type) => { if (type === 'error') fail(message); }
+    };
+
+    const script = document.createElement('script');
+    script.src = buildUrl + '/8e3597102738f7a24610863eb4f544d2.loader.js';
+    script.onerror = () => fail('The game loader could not be downloaded.');
+    script.onload = () => {
+      createUnityInstance(canvas, config, value => {
+        const percent = Math.max(0, Math.min(100, Math.round(value * 100)));
+        bar.style.width = percent + '%';
+        progress.setAttribute('aria-valuenow', String(percent));
+        percentLabel.textContent = percent + '%';
+        status.textContent = percent < 90 ? 'Downloading the garden…' : 'Preparing your runner…';
+      }).then(() => {
+        loading.classList.add('is-hidden');
+        loading.setAttribute('aria-hidden', 'true');
+        canvas.focus({ preventScroll: true });
+      }).catch(error => fail(String(error)));
+    };
+    document.body.appendChild(script);
+
+    canvas.addEventListener('contextmenu', event => event.preventDefault());
+    canvas.addEventListener('touchmove', event => event.preventDefault(), { passive: false });
+  </script>
+</body>
+</html>
