@@ -241,19 +241,19 @@
 
     const buildUrl = 'Build';
     const config = {
-      dataUrl: buildUrl + '/7694b63d8c976faf69063bdb8c52238d.data.unityweb',
-      frameworkUrl: buildUrl + '/e3e1ca093233aaf69d01d4a043d455b4.framework.js.unityweb',
-      codeUrl: buildUrl + '/39d86f42f19bf624889e597463b396d5.wasm.unityweb',
+      dataUrl: buildUrl + '/83310bc5d2824462994583e5f2559565.data.unityweb',
+      frameworkUrl: buildUrl + '/25dbd1834b1eeabef2ccf0d514312394.framework.js.unityweb',
+      codeUrl: buildUrl + '/93577000205e1938eea8a4c85804c188.wasm.unityweb',
       streamingAssetsUrl: 'StreamingAssets',
       companyName: 'Forge Originals',
       productName: 'Signal Afterlight',
-      productVersion: '1.0.4',
+      productVersion: '1.0.5',
       devicePixelRatio: Math.min(window.devicePixelRatio || 1, 1.5),
       showBanner: (message, type) => { if (type === 'error') fail(message); }
     };
 
     const script = document.createElement('script');
-    script.src = buildUrl + '/8e3597102738f7a24610863eb4f544d2.loader.js';
+    script.src = buildUrl + '/c546e092e89e9417ec89387fb173a93c.loader.js';
     script.onerror = () => fail('The game loader could not be downloaded.');
     script.onload = () => {
       createUnityInstance(canvas, config, value => {
