@@ -9,8 +9,8 @@
     <meta name="description" content="Lamplighter — a browser horde-survival run across floating isles at dusk." />
     <title>Lamplighter — Last Light over the Drift</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='34' r='18' fill='%23ffb347'/%3E%3Cpath d='M32 8 L40 30 L32 26 L24 30Z' fill='%23fff2c4'/%3E%3C/svg%3E" />
-    <script type="module" crossorigin src="./assets/index-2NgIOx1-.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BVhAPdRK.css">
+    <script type="module" crossorigin src="./assets/index-BXbhPwKA.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-ih4xWD7L.css">
   </head>
   <body>
     <div id="app">
@@ -109,6 +109,10 @@
             <button id="p-sound" class="chip">Sound: On</button>
             <button id="p-music" class="chip">Music: On</button>
           </div>
+          <div class="diag">
+            <button id="p-diag" class="chip" aria-describedby="p-diag-status">Copy diagnostics</button>
+            <div id="p-diag-status" class="diag-status" aria-live="polite"></div>
+          </div>
         </div>
       </div>
 
@@ -121,6 +125,10 @@
           <div class="btnrow">
             <button id="againbtn" class="primary">Run again</button>
             <button id="titlebtn">Title screen</button>
+          </div>
+          <div class="diag">
+            <button id="r-diag" class="chip" aria-describedby="r-diag-status">Copy diagnostics</button>
+            <div id="r-diag-status" class="diag-status" aria-live="polite"></div>
           </div>
         </div>
       </div>
