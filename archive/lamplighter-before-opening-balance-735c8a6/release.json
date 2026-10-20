@@ -1,0 +1,12 @@
+{
+  "version": "1.2.0-visualguns.1",
+  "sourceCommit": "735c8a662d3cd679cacb4d2989116ac3f7930b31",
+  "scope": "Weapon block/lock presentation polish; UI only; balance deferred",
+  "previousArchive": "archive/lamplighter-visual-guns-before-block-polish-d6c4311",
+  "publishedUTC": "2026-10-20T15:15:02.169634+00:00",
+  "assets": {
+    "assets/index-CFm5bJ3V.js": "feca640e6594b48c6e61c2deadf056c68b02e14c796c3469f43db547994a12a4",
+    "assets/index-bCL5agrY.css": "5fe4467121c53fbbd11422e5eeb6b1e67d44c6cd6f9d7bb333f2b7a8a95fb0fd",
+    "index.html": "4b65e661d6649625b2d0966784ca77e7a84a11f83418bf177c33bc940105609b"
+  }
+}
