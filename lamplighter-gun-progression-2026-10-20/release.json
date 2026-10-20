@@ -1,0 +1,23 @@
+{
+  "name": "Wickshot + Arc gun-progression candidate",
+  "version": "1.1.0-gunprog.1",
+  "sourceCommit": "db3f732c804eda7558adfe059fae9a379d81881a",
+  "sourceBranch": "feat/johann-gun-progression-2026-10-20",
+  "milestones": [
+    4,
+    8,
+    12
+  ],
+  "arcUnlockPlayerLevel": 5,
+  "verification": {
+    "unitTestsPassed": 66,
+    "browserTestsPassed": 41,
+    "independentViewportsPassed": 4
+  },
+  "scope": "In-run two-gun progression only. Balance is provisional; no carry-over, character or stage progression.",
+  "assets": {
+    "index.html": "c455f9076ccb233f1bd0e7c501e8902aa64d606979b3ae42c0f09da262363499",
+    "assets/index-DZySLYUe.css": "fc6893fc830042c8d6ac91c92e54e169739deab2965f5030a021b2b6e956a53f",
+    "assets/index-D-xrI9Fg.js": "22a124c3631586d1b8d111d1f9204ed9da899b445a70eaa35c11fe6df08b24ef"
+  }
+}
