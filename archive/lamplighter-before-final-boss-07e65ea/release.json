@@ -1,0 +1,11 @@
+{
+  "sourceCommit": "07e65ea00a39d1090ac6e77687849d950c8b9efa",
+  "scope": "Rare +2 gun upgrades15% with threshold carry-over; clearer stat labels/offer-quality fades; lightning icon containment; XP/enemies/pacing preserved",
+  "previousArchive": "archive/lamplighter-before-rare-upgrades-20629db",
+  "publishedUTC": "2026-10-20T20:06:19.908977+00:00",
+  "assets": {
+    "index.html": "3e1706a28587725843e5a6b1faeee85124800a31f4e36d292dad09e4103e9a31",
+    "assets/index-1uUPkgzA.css": "55072562a37450c03b0d055de0669cf33ebe63ee02375b47fa7f73075b66ed3e",
+    "assets/index-Dp1CbXl_.js": "55c0f52b8771901301dcfe7a6b2fdb40ac3bdaf33aa790d46ca2cf64ebe98f46"
+  }
+}

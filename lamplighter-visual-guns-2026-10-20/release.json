@@ -1,11 +1,12 @@
 {
-  "sourceCommit": "07e65ea00a39d1090ac6e77687849d950c8b9efa",
-  "scope": "Rare +2 gun upgrades15% with threshold carry-over; clearer stat labels/offer-quality fades; lightning icon containment; XP/enemies/pacing preserved",
-  "previousArchive": "archive/lamplighter-before-rare-upgrades-20629db",
-  "publishedUTC": "2026-10-20T20:06:19.908977+00:00",
+  "sourceCommit": "72cd0f087a5aef799619e0952a79134563370d2f",
+  "scope": "The Last Warden sealed final encounter; actual-effect offer strength; distinct perk illustrations and chosen identity. Original pre-final progression/pacing retained.",
+  "previousArchive": "archive/lamplighter-before-final-boss-07e65ea",
+  "publishedUTC": "2026-10-20T23:49:21.156655+00:00",
   "assets": {
-    "index.html": "3e1706a28587725843e5a6b1faeee85124800a31f4e36d292dad09e4103e9a31",
-    "assets/index-1uUPkgzA.css": "55072562a37450c03b0d055de0669cf33ebe63ee02375b47fa7f73075b66ed3e",
-    "assets/index-Dp1CbXl_.js": "55c0f52b8771901301dcfe7a6b2fdb40ac3bdaf33aa790d46ca2cf64ebe98f46"
-  }
+    "index.html": "e1906f843ba38cd68b667c93d9557bb83a0d02e01c67f90c6978765b109bdd04",
+    "assets/index-Bhb4CPG1.js": "25f54a7fc72208fba5d2711e5517a397b7279e989b1480ff1c761fe861f6dbef",
+    "assets/index-DpvVdAi0.css": "e5eb5f477c9729c6ad5225f10dc8b575037f542555583d7c8be676744f42826a"
+  },
+  "knownTuningResidual": "Limited earned bot holdout reasonable survivors n=3/10 median18.25 combat seconds, below rough60\u201390 intent; no claim of typical human/fun/performance outcome."
 }
