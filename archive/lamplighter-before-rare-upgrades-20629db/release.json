@@ -1,0 +1,11 @@
+{
+  "sourceCommit": "20629dba65a630bbb18a64a486b51bb7ff6469b9",
+  "scope": "Original stable XP/enemy pacing restored; forced upgrade-offer lanes removed; current gun progression/perks/UI retained",
+  "previousArchive": "archive/lamplighter-before-original-pacing-restore-95fd501",
+  "publishedUTC": "2026-10-20T18:16:30.125481+00:00",
+  "assets": {
+    "index.html": "ca4896f128ec5f1c1dca519a539df9da7cf315d564143d60e37a7aa7159a1c19",
+    "assets/index-Ba5VuHm-.js": "4051ddb2de34fbb99b84417ff267ed637ab58cd56e6a4ed47d4a5810368428d6",
+    "assets/index-bCL5agrY.css": "5fe4467121c53fbbd11422e5eeb6b1e67d44c6cd6f9d7bb333f2b7a8a95fb0fd"
+  }
+}

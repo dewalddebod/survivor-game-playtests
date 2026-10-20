@@ -1,11 +1,11 @@
 {
-  "sourceCommit": "20629dba65a630bbb18a64a486b51bb7ff6469b9",
-  "scope": "Original stable XP/enemy pacing restored; forced upgrade-offer lanes removed; current gun progression/perks/UI retained",
-  "previousArchive": "archive/lamplighter-before-original-pacing-restore-95fd501",
-  "publishedUTC": "2026-10-20T18:16:30.125481+00:00",
+  "sourceCommit": "07e65ea00a39d1090ac6e77687849d950c8b9efa",
+  "scope": "Rare +2 gun upgrades15% with threshold carry-over; clearer stat labels/offer-quality fades; lightning icon containment; XP/enemies/pacing preserved",
+  "previousArchive": "archive/lamplighter-before-rare-upgrades-20629db",
+  "publishedUTC": "2026-10-20T20:06:19.908977+00:00",
   "assets": {
-    "index.html": "ca4896f128ec5f1c1dca519a539df9da7cf315d564143d60e37a7aa7159a1c19",
-    "assets/index-Ba5VuHm-.js": "4051ddb2de34fbb99b84417ff267ed637ab58cd56e6a4ed47d4a5810368428d6",
-    "assets/index-bCL5agrY.css": "5fe4467121c53fbbd11422e5eeb6b1e67d44c6cd6f9d7bb333f2b7a8a95fb0fd"
+    "index.html": "3e1706a28587725843e5a6b1faeee85124800a31f4e36d292dad09e4103e9a31",
+    "assets/index-1uUPkgzA.css": "55072562a37450c03b0d055de0669cf33ebe63ee02375b47fa7f73075b66ed3e",
+    "assets/index-Dp1CbXl_.js": "55c0f52b8771901301dcfe7a6b2fdb40ac3bdaf33aa790d46ca2cf64ebe98f46"
   }
 }
