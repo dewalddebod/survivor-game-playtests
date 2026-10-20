@@ -1,12 +1,11 @@
 {
-  "version": "1.2.0-visualguns.1",
-  "sourceCommit": "95fd50116a18f42b23215aec4aa535dfc42a1bc6",
-  "scope": "Opening XP/pressure balance; cumulative gun progression and block UI preserved",
-  "previousArchive": "archive/lamplighter-before-opening-balance-735c8a6",
-  "publishedUTC": "2026-10-20T17:06:57.741954+00:00",
+  "sourceCommit": "20629dba65a630bbb18a64a486b51bb7ff6469b9",
+  "scope": "Original stable XP/enemy pacing restored; forced upgrade-offer lanes removed; current gun progression/perks/UI retained",
+  "previousArchive": "archive/lamplighter-before-original-pacing-restore-95fd501",
+  "publishedUTC": "2026-10-20T18:16:30.125481+00:00",
   "assets": {
-    "assets/index-Bg_VQoVM.js": "f9f979e994dd8c4a142c839d9c06b53e86af7e33ffbbfa09be30c21aa35e497b",
-    "assets/index-bCL5agrY.css": "5fe4467121c53fbbd11422e5eeb6b1e67d44c6cd6f9d7bb333f2b7a8a95fb0fd",
-    "index.html": "a3acc72e07ba5c5b10ec416e5577f77bb3df63080d76c076904260127fd98902"
+    "index.html": "ca4896f128ec5f1c1dca519a539df9da7cf315d564143d60e37a7aa7159a1c19",
+    "assets/index-Ba5VuHm-.js": "4051ddb2de34fbb99b84417ff267ed637ab58cd56e6a4ed47d4a5810368428d6",
+    "assets/index-bCL5agrY.css": "5fe4467121c53fbbd11422e5eeb6b1e67d44c6cd6f9d7bb333f2b7a8a95fb0fd"
   }
 }
