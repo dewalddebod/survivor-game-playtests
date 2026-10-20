@@ -1,11 +1,12 @@
 {
   "version": "1.2.0-visualguns.1",
-  "sourceCommit": "d6c4311e00086693806f50d8052a941ab7a45563",
-  "scope": "Visual four-block gun progression playtest; balance tuning deferred",
-  "publishedUTC": "2026-10-20T13:50:33.045055+00:00",
+  "sourceCommit": "735c8a662d3cd679cacb4d2989116ac3f7930b31",
+  "scope": "Weapon block/lock presentation polish; UI only; balance deferred",
+  "previousArchive": "archive/lamplighter-visual-guns-before-block-polish-d6c4311",
+  "publishedUTC": "2026-10-20T15:15:02.169634+00:00",
   "assets": {
-    "assets/index-CthMGCmb.css": "3774bef7bb0f1c199dd7112c65183abc86b3e7006bf8f8e5f223712196d82a61",
-    "assets/index-D1EzDL4M.js": "aef27a480759e87a35c64944f58045cc853316ef00977dd5f64d8ea09face8ad",
-    "index.html": "228e36116e7e167ffd51b8cd256a30504946ec706997308ce90de90a65a07012"
+    "assets/index-CFm5bJ3V.js": "feca640e6594b48c6e61c2deadf056c68b02e14c796c3469f43db547994a12a4",
+    "assets/index-bCL5agrY.css": "5fe4467121c53fbbd11422e5eeb6b1e67d44c6cd6f9d7bb333f2b7a8a95fb0fd",
+    "index.html": "4b65e661d6649625b2d0966784ca77e7a84a11f83418bf177c33bc940105609b"
   }
 }
