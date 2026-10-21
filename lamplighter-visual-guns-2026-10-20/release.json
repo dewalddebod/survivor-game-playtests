@@ -1,12 +1,13 @@
 {
-  "sourceCommit": "72cd0f087a5aef799619e0952a79134563370d2f",
-  "scope": "The Last Warden sealed final encounter; actual-effect offer strength; distinct perk illustrations and chosen identity. Original pre-final progression/pacing retained.",
-  "previousArchive": "archive/lamplighter-before-final-boss-07e65ea",
-  "publishedUTC": "2026-10-20T23:49:21.156655+00:00",
+  "sourceCommit": "0c6a77143aaf065c85561e645d2379b4209c6df0",
+  "scope": "Candidate ordinary level/cache/reroll hands contain effective non-MAX owned weapon progression when eligible;20% eligible +2 bonus. Prior cumulative features retained; XP/enemies/pacing/encounters/stats/UI unchanged.",
+  "previousArchive": "archive/lamplighter-before-weapon-offers-72cd0f0",
+  "publishedUTC": "2026-10-21T12:53:27.637183+00:00",
   "assets": {
-    "index.html": "e1906f843ba38cd68b667c93d9557bb83a0d02e01c67f90c6978765b109bdd04",
-    "assets/index-Bhb4CPG1.js": "25f54a7fc72208fba5d2711e5517a397b7279e989b1480ff1c761fe861f6dbef",
+    "index.html": "aebb9252379e4dc90eed781ca5ac1341660dc6d80fea916f0e55dec076e1e6c6",
+    "assets/index-BW8CsNzA.js": "4bec0e61ea428b055c395caffa116c9f9c44fe8359f404dd901bb67babb5117c",
     "assets/index-DpvVdAi0.css": "e5eb5f477c9729c6ad5225f10dc8b575037f542555583d7c8be676744f42826a"
   },
-  "knownTuningResidual": "Limited earned bot holdout reasonable survivors n=3/10 median18.25 combat seconds, below rough60\u201390 intent; no claim of typical human/fun/performance outcome."
+  "knownTuningResidual": "Limited earned bot holdout reasonable survivors n=3/10 median18.25 combat seconds, below rough60\u201390 intent; no claim of typical human/fun/performance outcome.",
+  "verification": "Fixed parent and independent QA, actual-baseline replica fidelity and predeclared80 accelerated ordinary-rule runs; not human feel or performance proof."
 }
