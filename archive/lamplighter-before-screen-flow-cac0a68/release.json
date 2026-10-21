@@ -1,0 +1,13 @@
+{
+  "sourceCommit": "cac0a68be83aaa7444379d49792ad8ee5c8b95ab",
+  "scope": "In-run upgrade presentation clarity, exact Arc cage removal, normal-world final-room/camera and safely frozen final-boss intro. Actual effects/offers/progression/combat unchanged; minion sticking and other screens deferred.",
+  "previousArchive": "archive/lamplighter-before-gameplay-presentation-0c6a771",
+  "publishedUTC": "2026-10-21T16:50:08.553032+00:00",
+  "assets": {
+    "index.html": "24082d9d4f95ba6307f0b3bd4f1839c16e874a7ad4db8f55f180b20670a190fc",
+    "assets/index-B8A4Ie66.js": "fa76869e474a19a81a3dc5cbe893236e83c6cbeb9b8f5e6f31165bb927520a7d",
+    "assets/index-BLPp3Ipz.css": "18aed0d731b1c25f51b8e31e054487f8febdab1c61f03fe05cb3f8eff1ed1c2d"
+  },
+  "verification": "Fixed parent and independent functional/visual QA; debug setup separated from normal-time earned input checks. Not physical-device/FPS/fun proof.",
+  "historicalTimingNote": "Limited earned bot holdout reasonable survivors n=3/10 median18.25 combat seconds, below rough60\u201390 intent; no claim of typical human/fun/performance outcome."
+}

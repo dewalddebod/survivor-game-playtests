@@ -1,13 +1,13 @@
 {
-  "sourceCommit": "cac0a68be83aaa7444379d49792ad8ee5c8b95ab",
-  "scope": "In-run upgrade presentation clarity, exact Arc cage removal, normal-world final-room/camera and safely frozen final-boss intro. Actual effects/offers/progression/combat unchanged; minion sticking and other screens deferred.",
-  "previousArchive": "archive/lamplighter-before-gameplay-presentation-0c6a771",
-  "publishedUTC": "2026-10-21T16:50:08.553032+00:00",
+  "sourceCommit": "76e603158d94ddcc8a976d3f66c1c707c7e4a4d9",
+  "scope": "Home floating-island Play, read-only weapon/perk catalogue, native victory/defeat results and complete Home/match/results loop. Wickshot start, combat, gun progression, offers, XP, enemies and bosses unchanged. No equipment/economy/unlock systems.",
+  "previousArchive": "archive/lamplighter-before-screen-flow-cac0a68",
+  "publishedUTC": "2026-10-21T20:24:38.556195+00:00",
   "assets": {
-    "index.html": "24082d9d4f95ba6307f0b3bd4f1839c16e874a7ad4db8f55f180b20670a190fc",
-    "assets/index-B8A4Ie66.js": "fa76869e474a19a81a3dc5cbe893236e83c6cbeb9b8f5e6f31165bb927520a7d",
-    "assets/index-BLPp3Ipz.css": "18aed0d731b1c25f51b8e31e054487f8febdab1c61f03fe05cb3f8eff1ed1c2d"
+    "index.html": "0ce886ed7fb4b76b31d8779daa9db03591d63c5d6707c4f03a89db84ed0805c6",
+    "assets/index-VsN24mfn.js": "c6e8a940a8c76debcd962cfc648682daa7c5b88b00af8e06409e10e055632272",
+    "assets/index-Bz4eftif.css": "aead78ddf4f4084d572005967674511b61cc7aa602b97987be5bb04837bbdd10"
   },
-  "verification": "Fixed parent and independent functional/visual QA; debug setup separated from normal-time earned input checks. Not physical-device/FPS/fun proof.",
+  "verification": "Fixed parent and independent functional/visual screen-flow QA. Normal input evidence and debug-assisted outcome fixtures distinguished; not physical-phone, human-feel or FPS proof.",
   "historicalTimingNote": "Limited earned bot holdout reasonable survivors n=3/10 median18.25 combat seconds, below rough60\u201390 intent; no claim of typical human/fun/performance outcome."
 }
