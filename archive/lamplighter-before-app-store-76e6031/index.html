@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#1c1538" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="description" content="Lamplighter — a browser horde-survival run across floating isles at dusk." />
+    <title>Lamplighter — Last Light over the Drift</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='34' r='18' fill='%23ffb347'/%3E%3Cpath d='M32 8 L40 30 L32 26 L24 30Z' fill='%23fff2c4'/%3E%3C/svg%3E" />
+    <script type="module" crossorigin src="./assets/index-VsN24mfn.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Bz4eftif.css">
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="gl"></canvas>
+      <canvas id="overlay"></canvas>
+      <div id="vignette"></div>
+      <div id="fade"></div>
+
+      <div id="hud" class="hidden">
+        <div id="xpbar"><div id="xpfill"></div><span id="lvl">1</span></div>
+        <div id="topline">
+          <div id="hpwrap">
+            <div id="hp"><div id="hpghost"></div><div id="hpfill"></div><span id="hptext">100</span></div>
+            <div id="dashpip" title="Dash"><span>DASH</span></div>
+          </div>
+          <div id="timerbox"><div id="timer">0:00</div><div id="phase">Dusk</div></div>
+          <div id="rightbox"><div id="kills">0</div><button id="pausebtn" aria-label="Pause">❚❚</button></div>
+        </div>
+        <div id="gunrow" aria-label="Weapons"></div>
+        <div id="bossbar" class="hidden">
+          <div class="bossname"><b></b><i></i></div>
+          <div class="bar"><div class="ghost"></div><div class="fill"></div><div class="tick t1"></div><div class="tick t2"></div></div>
+        </div>
+        <div id="loadout"></div>
+        <div id="banner"></div>
+        <div id="hint"></div>
+      </div>
+
+      <div id="touch">
+        <div id="stickzone"></div>
+        <div id="stick-base"><div id="stick-knob"></div></div>
+        <button id="btn-dash" aria-label="Dash">DASH</button>
+        <button id="btn-jump" aria-label="Jump">JUMP</button>
+      </div>
+
+<div id="title" class="screen home">
+  <div id="home-shell" class="home-shell" data-surface="home">
+    <header class="home-head">
+      <div class="logo">
+        <div class="logo-small">Last Light over the Drift</div>
+        <h1>LAMPLIGHTER</h1>
+      </div>
+      <button id="home-settings" class="icon-btn" type="button" aria-haspopup="dialog" aria-controls="settings-panel" aria-label="Settings">
+        <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-gear"/></svg></button>
+    </header>
+    <div class="home-place">
+      <button id="home-inventory" class="side-btn" type="button" aria-haspopup="dialog" aria-controls="catalogue">
+        <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-bag"/></svg><span>Inventory</span></button>
+      <div class="place-chip"><b class="place-name">The Drift</b><span class="logo-sub">Keep the Hearth's flame alive until dawn.</span></div>
+      <button id="home-help" class="side-btn" type="button" aria-haspopup="dialog" aria-controls="help-panel">
+        <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-help"/></svg><span>How to play</span></button>
+    </div>
+    <div id="home-stage" class="home-stage" aria-hidden="true"></div>
+    <div class="home-actions">
+      <div class="start-strip">
+        <div class="start-fact"><svg class="art" viewBox="0 0 64 64" aria-hidden="true"><use href="#gun-wick"/></svg>
+          <span>Start: <b>Wickshot</b><small class="start-slots">New weapon slots at levels 5, 12 and 20</small></span></div>
+        <div id="best"></div>
+      </div>
+      <button id="startbtn" class="primary" type="button">Play</button>
+    </div>
+    <nav class="home-rail" aria-label="Main">
+      <ul>
+        <li><button id="rail-home" class="rail-slot current" type="button" aria-current="page"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-home"/></svg><span>Home</span></button></li>
+        <li><button id="rail-inventory" class="rail-slot" type="button" aria-haspopup="dialog" aria-controls="catalogue"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-bag"/></svg><span>Inventory</span></button></li>
+        <li class="rail-slot locked"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-lock"/></svg><span class="rail-name">Power Up</span><span class="rail-soon">Soon</span><span class="ll-sr">, not available yet</span></li>
+        <li class="rail-slot locked"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-lock"/></svg><span class="rail-name">Soon</span><span class="ll-sr">, not available yet</span></li>
+        <li class="rail-slot locked"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-lock"/></svg><span class="rail-name">Soon</span><span class="ll-sr">, not available yet</span></li>
+      </ul>
+    </nav>
+  </div>
+  <div id="catalogue" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="catalogue-title" aria-describedby="catalogue-sub" data-surface="catalogue">
+  <div class="sheet-panel">
+    <header class="sheet-head">
+      <h2 id="catalogue-title">Inventory</h2>
+      <p id="catalogue-sub">Weapon &amp; perk catalogue</p>
+      <button id="catalogue-close" class="icon-btn sheet-x" type="button" aria-label="Close catalogue"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-close"/></svg></button>
+    </header>
+    <div class="cat-tabs" role="tablist" aria-label="Catalogue sections">
+      <button id="cat-tab-weapons" role="tab" type="button" aria-selected="true" aria-controls="cat-weapons" tabindex="0">Weapons</button>
+      <button id="cat-tab-perks" role="tab" type="button" aria-selected="false" aria-controls="cat-perks" tabindex="-1">Perks</button>
+    </div>
+    <div id="catalogue-body" class="sheet-body">
+      <section id="cat-weapons" role="tabpanel" aria-labelledby="cat-tab-weapons">
+        <div id="cat-grid" class="cat-grid" role="group" aria-label="Weapons"><!-- 7 tiles from catalogue.ts --></div>
+        <article id="cat-detail" class="cat-detail" aria-live="polite" aria-atomic="true"><!-- detail of selected gun --></article>
+      </section>
+      <section id="cat-perks" role="tabpanel" aria-labelledby="cat-tab-perks" tabindex="0" hidden><!-- 7 groups × 4 perks --></section>
+    </div>
+    <footer class="sheet-foot"><button id="catalogue-back" class="secondary-btn" type="button">Back to Home</button></footer>
+  </div>
+</div>
+<div id="settings-panel" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title" data-surface="settings">
+  <div class="sheet-panel small">
+    <header class="sheet-head"><h2 id="settings-title">Settings</h2>
+      <button id="settings-close" class="icon-btn sheet-x" type="button" aria-label="Close settings"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-close"/></svg></button></header>
+    <div class="sheet-body"><div class="toggles">
+      <button id="tgl-sound" class="chip">Sound: On</button><button id="tgl-music" class="chip">Music: On</button><button id="tgl-quality" class="chip">Quality: Auto</button>
+    </div></div>
+  </div>
+</div>
+<div id="help-panel" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="help-title" data-surface="help">
+  <div class="sheet-panel">
+    <header class="sheet-head"><h2 id="help-title">How to play</h2>
+      <button id="help-close" class="icon-btn sheet-x" type="button" aria-label="Close how to play"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-close"/></svg></button></header>
+    <div class="sheet-body" tabindex="0">
+      <div class="help-cards">
+
+            <div class="ctl-card desk">
+              <h3>Keyboard</h3>
+              <p><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> run</p>
+              <p><kbd>Space</kbd> jump · hold for height</p>
+              <p><kbd>Shift</kbd> roll-dash (dodges harm)</p>
+              <p><kbd>Esc</kbd> pause · <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> pick upgrades</p>
+            </div>
+            <div class="ctl-card touchc">
+              <h3>Touch</h3>
+              <p>Drag anywhere on the left to run</p>
+              <p><b>JUMP</b> and <b>DASH</b> buttons on the right</p>
+              <p>Tap a card to choose upgrades</p>
+            </div>
+            <div class="ctl-card how">
+              <h3>The run</h3>
+              <p>Your kindlers <b>fire on their own</b> — you move, jump and choose.</p>
+              <p>Run into tall walls to <b>climb</b>. Jump at a <span class="blue">blue ring</span> to ride a <b>zipline</b>.</p>
+              <p>Shove Hollow off the edges. <span class="pink">Pink means danger.</span></p>
+              <p>Three night-terrors rise as the night deepens. Then the Last Warden comes for the Hearth: fell all four and the dawn is yours.</p><p>Start with <b>Wickshot</b>. New weapon slots open at levels 5, 12 and 20.</p>
+            </div>
+
+      </div>
+      <div class="credit">Original game · procedural art &amp; synthesized audio · no external assets</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+      <div id="choose" class="screen hidden">
+        <div class="choose-inner">
+          <h2 id="choose-title">The flame grows</h2>
+          <div id="choose-sub">Choose a kindling</div>
+          <div id="promo" class="hidden"></div>
+          <div id="cards"></div>
+          <div class="choose-foot">
+            <button id="rerollbtn" class="chip">Reroll (2)</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="pause" class="screen hidden">
+        <div class="panel">
+          <h2>Paused</h2>
+          <div id="pause-build"></div><div id="pause-guns" class="gunlist"></div>
+          <div class="btnrow">
+            <button id="resumebtn" class="primary">Resume</button>
+            <button id="restartbtn">Restart run</button>
+            <button id="menubtn" aria-label="End this run and return Home">Home</button>
+          </div>
+          <div class="toggles">
+            <button id="p-sound" class="chip">Sound: On</button>
+            <button id="p-music" class="chip">Music: On</button>
+          </div>
+          <div class="diag">
+            <button id="p-diag" class="chip" aria-describedby="p-diag-status">Copy diagnostics</button>
+            <div id="p-diag-status" class="diag-status" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+
+<div id="result" class="screen hidden">
+  <div class="result-shell" data-surface="result">
+    <div id="result-scroll" class="result-scroll">
+      <header class="result-head">
+        <p id="result-kicker" class="result-kicker">Run complete</p>
+        <div id="result-word" class="result-word" aria-hidden="true">Victory</div>
+        <h2 id="result-title">Dawn breaks</h2>
+        <div id="result-sub"></div>
+      </header>
+      <div class="result-window" aria-hidden="true"></div>
+      <div class="result-tabs" role="tablist" aria-label="Run details">
+        <button id="rtab-overview" role="tab" type="button" aria-selected="true" aria-controls="rpanel-overview" tabindex="0">Overview</button>
+        <button id="rtab-weapons" role="tab" type="button" aria-selected="false" aria-controls="rpanel-weapons" tabindex="-1">Weapons</button>
+        <button id="rtab-build" role="tab" type="button" aria-selected="false" aria-controls="rpanel-build" tabindex="-1">Build</button>
+        <button id="rtab-damage" role="tab" type="button" aria-selected="false" aria-controls="rpanel-damage" tabindex="-1">Damage</button>
+      </div>
+      <section id="rpanel-overview" tabindex="0" class="rpanel" role="tabpanel" aria-labelledby="rtab-overview">
+        <div id="result-stats"></div>
+        <p id="result-final" class="result-final"></p>
+        <h3 class="rpanel-h">Your final loadout</h3>
+        <div id="result-guns" class="gunlist"></div>
+      </section>
+      <section id="rpanel-weapons" class="rpanel" role="tabpanel" aria-labelledby="rtab-weapons" tabindex="0" hidden><div id="result-weapon-detail"></div></section>
+      <section id="rpanel-build" class="rpanel" role="tabpanel" aria-labelledby="rtab-build" tabindex="0" hidden><div id="result-build"></div></section>
+      <section id="rpanel-damage" class="rpanel" role="tabpanel" aria-labelledby="rtab-damage" tabindex="0" hidden>
+        <h3 class="rpanel-h">Damage dealt by weapon</h3><p class="rpanel-note">Credited per hit, including overkill. Weapon damage only.</p>
+        <div id="result-weapons"></div>
+      </section>
+      <div class="diag">
+        <button id="r-diag" class="chip" aria-describedby="r-diag-status">Copy diagnostics</button>
+        <div id="r-diag-status" class="diag-status" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      <button id="titlebtn" class="primary" type="button">Home</button>
+      <button id="againbtn" class="secondary-btn" type="button">Play again</button>
+    </div>
+    <div id="result-announce" class="ll-sr" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
+
+      <div id="boot">Kindling…</div>
+    </div>
+  </body>
+</html>

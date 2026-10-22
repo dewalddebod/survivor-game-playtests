@@ -1,13 +1,14 @@
 {
-  "sourceCommit": "76e603158d94ddcc8a976d3f66c1c707c7e4a4d9",
-  "scope": "Home floating-island Play, read-only weapon/perk catalogue, native victory/defeat results and complete Home/match/results loop. Wickshot start, combat, gun progression, offers, XP, enemies and bosses unchanged. No equipment/economy/unlock systems.",
-  "previousArchive": "archive/lamplighter-before-screen-flow-cac0a68",
-  "publishedUTC": "2026-10-21T20:24:38.556195+00:00",
+  "sourceCommit": "8dc0e7f97b7a12705907a87de07cf3fc4428d43d",
+  "scope": "Account XP/coins, starter selection, Workshop 12-step damage/crit track, Power Up cards, perk mastery, quests, real navigation, 3-stage chapter with inter-stage vendor (packages 1-7).",
+  "previousArchive": "archive/lamplighter-before-app-store-76e6031",
+  "previousSourceCommit": "76e603158d94ddcc8a976d3f66c1c707c7e4a4d9",
+  "publishedUTC": "2026-10-22T17:13:35.916518+00:00",
   "assets": {
-    "index.html": "0ce886ed7fb4b76b31d8779daa9db03591d63c5d6707c4f03a89db84ed0805c6",
-    "assets/index-VsN24mfn.js": "c6e8a940a8c76debcd962cfc648682daa7c5b88b00af8e06409e10e055632272",
-    "assets/index-Bz4eftif.css": "aead78ddf4f4084d572005967674511b61cc7aa602b97987be5bb04837bbdd10"
+    "build-info.json": "519d2e6fd716c51f672b3f185caf7f396f71bb72b254694eee2d6a067c2f40c8",
+    "index.html": "6be56927ba248adc1debb9eb4818280dc165d252de8359467017215af4e85bc3",
+    "assets/index-Bfy8Ukmd.js": "500d95f9bc152dc4841d1c895a89f947ca9f01b4114cc574458de81a3bbace57",
+    "assets/index-C3vc297Y.css": "629e6382676914daabf6808d89510d112d5ae8610f71e82765065df53c16984b"
   },
-  "verification": "Fixed parent and independent functional/visual screen-flow QA. Normal input evidence and debug-assisted outcome fixtures distinguished; not physical-phone, human-feel or FPS proof.",
-  "historicalTimingNote": "Limited earned bot holdout reasonable survivors n=3/10 median18.25 combat seconds, below rough60\u201390 intent; no claim of typical human/fun/performance outcome."
+  "verification": "Per-checkpoint independent re-tests, full QA+prod suites, independent Opus QA verdict PASS_WITH_MINOR."
 }

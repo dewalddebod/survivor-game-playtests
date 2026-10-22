@@ -9,8 +9,8 @@
     <meta name="description" content="Lamplighter — a browser horde-survival run across floating isles at dusk." />
     <title>Lamplighter — Last Light over the Drift</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='34' r='18' fill='%23ffb347'/%3E%3Cpath d='M32 8 L40 30 L32 26 L24 30Z' fill='%23fff2c4'/%3E%3C/svg%3E" />
-    <script type="module" crossorigin src="./assets/index-VsN24mfn.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Bz4eftif.css">
+    <script type="module" crossorigin src="./assets/index-Bfy8Ukmd.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C3vc297Y.css">
   </head>
   <body>
     <div id="app">
@@ -64,11 +64,13 @@
         <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-help"/></svg><span>How to play</span></button>
     </div>
     <div id="home-stage" class="home-stage" aria-hidden="true"></div>
+    <div id="profile-banner" class="profile-banner hidden" role="status" aria-live="polite"></div>
     <div class="home-actions">
       <div class="start-strip">
-        <div class="start-fact"><svg class="art" viewBox="0 0 64 64" aria-hidden="true"><use href="#gun-wick"/></svg>
-          <span>Start: <b>Wickshot</b><small class="start-slots">New weapon slots at levels 5, 12 and 20</small></span></div>
+        <button id="starter-open" class="start-fact" type="button" aria-haspopup="dialog" aria-controls="starter-panel"><svg id="starter-art" class="art" viewBox="0 0 64 64" aria-hidden="true"><use href="#gun-wick"/></svg>
+          <span>Start: <b id="starter-name">Wickshot</b> <span class="start-change">Change</span><small class="start-slots">New weapon slots at levels 5, 12 and 20</small></span></button>
         <div id="best"></div>
+        <div id="best-stage"></div>
       </div>
       <button id="startbtn" class="primary" type="button">Play</button>
     </div>
@@ -76,9 +78,8 @@
       <ul>
         <li><button id="rail-home" class="rail-slot current" type="button" aria-current="page"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-home"/></svg><span>Home</span></button></li>
         <li><button id="rail-inventory" class="rail-slot" type="button" aria-haspopup="dialog" aria-controls="catalogue"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-bag"/></svg><span>Inventory</span></button></li>
-        <li class="rail-slot locked"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-lock"/></svg><span class="rail-name">Power Up</span><span class="rail-soon">Soon</span><span class="ll-sr">, not available yet</span></li>
-        <li class="rail-slot locked"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-lock"/></svg><span class="rail-name">Soon</span><span class="ll-sr">, not available yet</span></li>
-        <li class="rail-slot locked"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-lock"/></svg><span class="rail-name">Soon</span><span class="ll-sr">, not available yet</span></li>
+        <li><button id="rail-powerup" class="rail-slot" type="button" aria-haspopup="dialog" aria-controls="powerup-panel"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-spark"/></svg><span>Power Up</span></button></li>
+        <li><button id="rail-quests" class="rail-slot" type="button" aria-haspopup="dialog" aria-controls="quests-panel"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-scroll"/></svg><span>Quests</span><span id="rail-quests-badge" class="rail-badge" aria-hidden="true" hidden></span><span id="rail-quests-sr" class="ll-sr"></span></button></li>
       </ul>
     </nav>
   </div>
@@ -86,12 +87,13 @@
   <div class="sheet-panel">
     <header class="sheet-head">
       <h2 id="catalogue-title">Inventory</h2>
-      <p id="catalogue-sub">Weapon &amp; perk catalogue</p>
+      <p id="catalogue-sub">Weapons, perks and your resources</p>
       <button id="catalogue-close" class="icon-btn sheet-x" type="button" aria-label="Close catalogue"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-close"/></svg></button>
     </header>
     <div class="cat-tabs" role="tablist" aria-label="Catalogue sections">
       <button id="cat-tab-weapons" role="tab" type="button" aria-selected="true" aria-controls="cat-weapons" tabindex="0">Weapons</button>
       <button id="cat-tab-perks" role="tab" type="button" aria-selected="false" aria-controls="cat-perks" tabindex="-1">Perks</button>
+      <button id="cat-tab-resources" role="tab" type="button" aria-selected="false" aria-controls="cat-resources" tabindex="-1">Resources</button>
     </div>
     <div id="catalogue-body" class="sheet-body">
       <section id="cat-weapons" role="tabpanel" aria-labelledby="cat-tab-weapons">
@@ -99,8 +101,54 @@
         <article id="cat-detail" class="cat-detail" aria-live="polite" aria-atomic="true"><!-- detail of selected gun --></article>
       </section>
       <section id="cat-perks" role="tabpanel" aria-labelledby="cat-tab-perks" tabindex="0" hidden><!-- 7 groups × 4 perks --></section>
+      <section id="cat-resources" role="tabpanel" aria-labelledby="cat-tab-resources" tabindex="0" hidden><!-- coins, account level, records (inventory.ts) --></section>
     </div>
     <footer class="sheet-foot"><button id="catalogue-back" class="secondary-btn" type="button">Back to Home</button></footer>
+  </div>
+</div>
+<div id="starter-panel" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="starter-title" aria-describedby="starter-sub" data-surface="starter">
+  <div class="sheet-panel small">
+    <header class="sheet-head"><h2 id="starter-title">Starter</h2>
+      <p id="starter-sub">Every run begins with the weapon you choose here.</p>
+      <button id="starter-close" class="icon-btn sheet-x" type="button" aria-label="Close starter choice"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-close"/></svg></button></header>
+    <div id="starter-body" class="sheet-body">
+      <div id="starter-list" class="starter-list" role="group" aria-label="Starter weapons"><!-- 7 options from catalogue.ts --></div>
+      <p id="starter-msg" class="starter-msg" role="status" aria-live="polite"></p>
+    </div>
+    <footer class="sheet-foot"><button id="starter-back" class="secondary-btn" type="button">Back to Home</button></footer>
+  </div>
+</div>
+<div id="powerup-panel" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="powerup-title" aria-describedby="powerup-sub">
+  <div class="sheet-panel">
+    <header class="sheet-head"><h2 id="powerup-title">Power Up</h2>
+      <p id="powerup-sub">Workshop: spend coins to make a starter weapon a little stronger in every run.</p>
+      <button id="powerup-close" class="icon-btn sheet-x" type="button" aria-label="Close Power Up"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-close"/></svg></button></header>
+    <div class="cat-tabs pu-tabs" role="tablist" aria-label="Power Up sections">
+      <button id="pu-tab-workshop" role="tab" type="button" aria-selected="true" aria-controls="powerup-body" tabindex="0">Workshop</button>
+      <button id="pu-tab-cards" role="tab" type="button" aria-selected="false" aria-controls="powerup-body" tabindex="-1">Cards</button>
+      <button id="pu-tab-mastery" role="tab" type="button" aria-selected="false" aria-controls="powerup-body" tabindex="-1">Mastery</button>
+    </div>
+    <div id="powerup-body" class="sheet-body">
+      <p class="ws-wallet">Coins <b id="ws-coins">0</b></p>
+      <p id="ws-msg" class="ws-msg" role="status" aria-live="polite"></p>
+      <div id="ws-list" class="ws-list" role="list" aria-label="Workshop"><!-- 7 cards from workshop.ts --></div>
+      <div id="cards-view" class="pu-view" hidden><!-- cards tab from powerUp.ts --></div>
+      <div id="mastery-view" class="pu-view" hidden><!-- mastery tab from powerUp.ts --></div>
+    </div>
+    <footer class="sheet-foot"><button id="powerup-back" class="secondary-btn" type="button">Back to Home</button></footer>
+  </div>
+</div>
+<div id="quests-panel" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="quests-title" aria-describedby="quests-sub">
+  <div class="sheet-panel">
+    <header class="sheet-head"><h2 id="quests-title">Quests</h2>
+      <p id="quests-sub">Each quest pays its coins once. Claim them here.</p>
+      <button id="quests-close" class="icon-btn sheet-x" type="button" aria-label="Close quests"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-close"/></svg></button></header>
+    <div id="quests-body" class="sheet-body">
+      <p class="ws-wallet">Coins <b id="quests-coins">0</b></p>
+      <p id="quests-msg" class="ws-msg" role="status" aria-live="polite"></p>
+      <ul id="quests-list" class="q-list" aria-label="Quests"><!-- 12 quests from quests.ts --></ul>
+    </div>
+    <footer class="sheet-foot"><button id="quests-back" class="secondary-btn" type="button">Back to Home</button></footer>
   </div>
 </div>
 <div id="settings-panel" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title" data-surface="settings">
@@ -165,20 +213,33 @@
         <div class="panel">
           <h2>Paused</h2>
           <div id="pause-build"></div><div id="pause-guns" class="gunlist"></div>
-          <div class="btnrow">
+          <div id="pause-actions" class="btnrow">
             <button id="resumebtn" class="primary">Resume</button>
             <button id="restartbtn">Restart run</button>
             <button id="menubtn" aria-label="End this run and return Home">Home</button>
+          </div>
+          <div id="endrun-confirm" class="endrun-confirm hidden" role="alertdialog" aria-modal="false" aria-labelledby="endrun-text">
+            <p id="endrun-text">End this run? You keep XP and coins for time survived.</p>
+            <div class="btnrow">
+              <button id="endrun-yes" class="primary" type="button">End run</button>
+              <button id="endrun-no" type="button">Keep playing</button>
+            </div>
           </div>
           <div class="toggles">
             <button id="p-sound" class="chip">Sound: On</button>
             <button id="p-music" class="chip">Music: On</button>
           </div>
+          <section id="pause-inspect" class="pause-inspect" aria-label="This run"><!-- read-only: trinkets, relics, run values (ui.ts) --></section>
           <div class="diag">
             <button id="p-diag" class="chip" aria-describedby="p-diag-status">Copy diagnostics</button>
             <div id="p-diag-status" class="diag-status" aria-live="polite"></div>
           </div>
         </div>
+      </div>
+
+      <!-- F6: inter-stage vendor; the world is frozen while it is open (src/ui/vendor.ts renders the body). -->
+      <div id="vendor" class="screen hidden" role="dialog" aria-modal="true" aria-labelledby="vendor-title">
+        <div id="vendor-body" class="panel wide vendor-panel"></div>
       </div>
 
 <div id="result" class="screen hidden">
@@ -197,9 +258,11 @@
         <button id="rtab-build" role="tab" type="button" aria-selected="false" aria-controls="rpanel-build" tabindex="-1">Build</button>
         <button id="rtab-damage" role="tab" type="button" aria-selected="false" aria-controls="rpanel-damage" tabindex="-1">Damage</button>
       </div>
+      <section id="result-rewards" class="result-rewards" role="status" aria-live="polite" aria-label="Rewards" hidden></section>
       <section id="rpanel-overview" tabindex="0" class="rpanel" role="tabpanel" aria-labelledby="rtab-overview">
         <div id="result-stats"></div>
         <p id="result-final" class="result-final"></p>
+        <p id="result-stage" class="result-stage"></p>
         <h3 class="rpanel-h">Your final loadout</h3>
         <div id="result-guns" class="gunlist"></div>
       </section>
